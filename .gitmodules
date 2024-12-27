@@ -1,0 +1,3 @@
+[submodule "src/sasf-commons"]
+	path = src/sasf-commons
+	url = https://github.com/JosthinAyonC/sasf-commons.git

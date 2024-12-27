@@ -1,11 +1,15 @@
+const tailwindTheme = require('./src/sasf-commons/config/tailwind.theme');
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      colors: tailwindTheme.colors,
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};

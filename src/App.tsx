@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from 'src/sasf-commons/provider/ThemeContext';
 
-import './index.scss';
+import Main from './app/Main';
+import './globals.css';
 
 const App = () => (
-  <div className="mt-10 text-3xl mx-auto max-w-6xl">
-    <div>Name: hosts</div>
-    <div>Framework: react</div>
-    <div>Language: TypeScripst</div>
-    <div>CSS: Tailwind</div>
-    accediendo a {`${process.env.MF_1_URL}`}
-  </div>
+  <React.StrictMode>
+    <ThemeProvider>
+      <Main />
+    </ThemeProvider>
+  </React.StrictMode>
 );
 const rootElement = document.getElementById('app');
 if (!rootElement) throw new Error('Failed to find the root element');

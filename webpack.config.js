@@ -3,25 +3,35 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
 
+// Carga manual de variables de entorno
+const dotenv = require("dotenv");
+
+// Detecta el entorno y carga el archivo adecuado
+const isProduction = process.env.NODE_ENV === "production";
+dotenv.config({
+  path: isProduction ? "./.env" : "./.env.local",
+});
+
 const deps = require("./package.json").dependencies;
 const printCompilationMessage = require("./compilation.config.js");
 
 module.exports = (_, argv) => {
-  const isProduction = argv.mode === "production";
-
   console.log(`Ejecutando proyecto en modo ${isProduction ? "producción" : "desarrollo"}`);
 
   return {
     output: {
-      publicPath: "http://localhost:3000/",
+      publicPath: `http://localhost:${process.env.APP_PORT}/`,
     },
 
     resolve: {
       extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+      alias: {
+        '~': path.resolve(__dirname, 'src/sasf-commons'),
+      },
     },
 
     devServer: {
-      port: 3000,
+      port: process.env.APP_PORT,
       historyApiFallback: true,
       watchFiles: [path.resolve(__dirname, "src")],
       onListening: function (devServer) {
@@ -68,8 +78,12 @@ module.exports = (_, argv) => {
       new ModuleFederationPlugin({
         name: "host",
         filename: "remoteEntry.js",
-        remotes: {},
-        exposes: {},
+        remotes: {
+          // Aqui se agregan lo n remotos que se necesiten
+          microapp: `microapp@${process.env.MF_1_URL}/remoteEntry.js`,
+        },
+        exposes: {
+        },
         shared: {
           ...deps,
           react: {
