@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ThemeProvider } from 'src/sasf-commons/provider/ThemeContext';
+import { ThemeProvider } from '~/provider/ThemeContext';
 
 import Main from './app/Main';
 import './globals.css';

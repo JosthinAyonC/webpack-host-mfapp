@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'src/sasf-commons/provider/ThemeContext';
+import ThemeToggle from '~/components/ui/ThemeTogle';
 
 const Main: React.FC = () => {
   return (
@@ -7,16 +7,6 @@ const Main: React.FC = () => {
       <h1 className="text-2xl">Modo Noche y Día con TailwindCSS</h1>
       <ThemeToggle />
     </div>
-  );
-};
-
-const ThemeToggle: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
-
-  return (
-    <button className="p-2 rounded bg-primary-light dark:bg-primary-dark text-font-light dark:text-font-dark" onClick={toggleTheme}>
-      Cambiar a {theme === 'light' ? 'modo oscuro' : 'modo claro'}
-    </button>
   );
 };
 

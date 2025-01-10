@@ -4,12 +4,8 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: 'class',
   theme: {
-    extend: {
-      colors: tailwindTheme.colors,
-    },
+    extend: tailwindTheme.theme.extend,
+    colors: tailwindTheme.theme.colors,
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
+  plugins: tailwindTheme.plugins,
 };
