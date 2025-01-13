@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from '~/provider/ThemeContext';
+import { store } from '~/store';
 
 import Main from './app/Main';
 import './globals.css';
 
 const App = () => (
   <React.StrictMode>
-    <ThemeProvider>
-      <Main />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <Main />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );
 const rootElement = document.getElementById('app');
