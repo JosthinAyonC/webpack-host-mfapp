@@ -1,32 +1,27 @@
-import MicroTestPage from 'microapp/MicroTestPage';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { FormProvider, useForm } from 'react-hook-form';
 import ThemeToggle from '~/components/ui/ThemeTogle';
-import { RootState, login } from '~/store';
+import { TextField } from '~/form/fields/TextField';
+import { FormState } from '~/form/fields/types';
 
 const Main: React.FC = () => {
-  const { isAuthenticated, token } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch();
+  const methods = useForm<FormState>({ mode: 'onSubmit' });
 
-  const handleDispatch = () => {
-    dispatch(
-      login({
-        token: 'dada',
-        isAuthenticated: true,
-        username: 'Pepe',
-      })
-    );
+  const handleFormSubmit = (data: FormState) => {
+    console.log(data);
   };
 
   return (
-    <div className="bg-[var(--bg-color)] min-h-screen p-4">
-      <h1 className="text-2xl text-[var(--font-color)]">Modo Noche y Día con TailwindCSS</h1>
-      {`${isAuthenticated}`}
-      {`${token}`}
-      <ThemeToggle />
-      <MicroTestPage />
-      <button onClick={handleDispatch}>Test dispatch</button>
+    <div className="bg-[var(--bg)]">
+      <FormProvider {...methods}>
+        <ThemeToggle />
+        <form onSubmit={methods.handleSubmit(handleFormSubmit)}>
+          <TextField name="cedula" isRequired placeholder="Insert yourt text here" />
+          <button type="submit" className="text-[var(--font)]">
+            Test dispatch
+          </button>
+        </form>
+      </FormProvider>
     </div>
   );
 };
