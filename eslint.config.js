@@ -23,7 +23,7 @@ module.exports = tseslint.config(
       '@typescript-eslint/no-explicit-any': 'error',
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'prettier/prettier': 'error',
-      "sort-imports": ["warn", { "ignoreCase": true, "ignoreDeclarationSort": true }]
+      "sort-imports": ["off", { "ignoreCase": true, "ignoreDeclarationSort": true }]
     },
   },
 );
