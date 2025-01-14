@@ -5,8 +5,9 @@ import { CheckboxField } from '~/form/fields/CheckboxField';
 import { NumberField } from '~/form/fields/NumberField';
 import RadioGroupField from '~/form/fields/RadioGroupField';
 import { SelectField } from '~/form/fields/SelectField';
+import { TextAreaField } from '~/form/fields/TextAreaField';
 import { TextField } from '~/form/fields/TextField';
-import { TextAreaField } from '~/form/fields/TextAreaField'; // Importamos el TextAreaField
+// Importamos el TextAreaField
 import { FormState } from '~/form/fields/types';
 
 const Main: React.FC = () => {
@@ -48,11 +49,7 @@ const Main: React.FC = () => {
             inputClassName="border-[var(--border)] focus:ring-[var(--focus)]"
             labelClassName="text-[var(--font)]"
           />
-          <CheckboxField
-            label="Acepto los términos y condiciones"
-            checkClassName="accent-primary"
-            name="terms"
-          />
+          <CheckboxField label="Acepto los términos y condiciones" checkClassName="accent-primary" name="terms" />
           <RadioGroupField
             name="gender"
             options={genderOptions}
