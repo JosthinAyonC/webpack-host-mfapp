@@ -13,11 +13,11 @@ const App = () => (
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <ThemeProvider>
-          <DialogProvider>
+        <DialogProvider>
+          <ThemeProvider>
             <AppRouting />
-          </DialogProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </DialogProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>

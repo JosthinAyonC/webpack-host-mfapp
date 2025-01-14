@@ -3,13 +3,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 import ThemeToggle from '~/components/ui/ThemeTogle';
 import { TextField } from '~/form/fields/TextField';
 import { FormState } from '~/form/fields/types';
-import { useDialog } from '~/provider/DialogProvider';
 
-import '../../app/dialogs/DialogTest';
-import '../../app/dialogs/DialogTest2';
+import { DialogUse } from '../examples/DialogUse';
 
 export const Main = () => {
-  const { openDialog } = useDialog();
   const methods = useForm<FormState>({ mode: 'onSubmit' });
 
   const handleFormSubmit = (data: FormState) => {
@@ -25,7 +22,7 @@ export const Main = () => {
           Test dispatch
         </button>
       </form>
-      <button onClick={() => openDialog('modalTest', '12345')}>Open Modal Test</button>
+      <DialogUse />
     </FormProvider>
   );
 };
