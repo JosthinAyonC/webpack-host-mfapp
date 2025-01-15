@@ -56,10 +56,12 @@
     "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
+    "@emotion/is-prop-valid": "^1.3.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@reduxjs/toolkit": "^2.5.0",
+    "framer-motion": "^11.18.0",
     "host": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

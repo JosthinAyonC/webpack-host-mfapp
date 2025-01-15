@@ -4,7 +4,7 @@ import ThemeToggle from '~/components/ui/ThemeTogle';
 import { TextField } from '~/form/fields/TextField';
 import { FormState } from '~/form/fields/types';
 
-import { DialogUse } from '../examples/DialogUse';
+import { DialogUse } from '../examples/dialog/DialogUse';
 
 export const Main = () => {
   const methods = useForm<FormState>({ mode: 'onSubmit' });

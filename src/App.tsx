@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { DialogProvider } from '~/provider/DialogProvider';
+import { DialogProvider } from '~/provider/DialogContext';
 import { ThemeProvider } from '~/provider/ThemeProvider';
 import { store } from '~/store';
 
@@ -12,13 +12,13 @@ import './globals.css';
 const App = () => (
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
-        <DialogProvider>
+      <DialogProvider>
+        <Provider store={store}>
           <ThemeProvider>
             <AppRouting />
           </ThemeProvider>
-        </DialogProvider>
-      </Provider>
+        </Provider>
+      </DialogProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
