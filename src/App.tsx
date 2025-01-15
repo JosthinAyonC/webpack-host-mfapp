@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '~/provider/ThemeContext';
+import { BrowserRouter } from 'react-router-dom';
+import { DialogProvider } from '~/provider/DialogContext';
+import { ThemeProvider } from '~/provider/ThemeProvider';
 import { store } from '~/store';
 
-import Main from './app/Main';
+import AppRouting from './app/AppRouting';
 import './globals.css';
 
 const App = () => (
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider>
-        <Main />
-      </ThemeProvider>
-    </Provider>
+    <BrowserRouter>
+      <DialogProvider>
+        <Provider store={store}>
+          <ThemeProvider>
+            <AppRouting />
+          </ThemeProvider>
+        </Provider>
+      </DialogProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 const rootElement = document.getElementById('app');
