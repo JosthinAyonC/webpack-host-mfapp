@@ -6,13 +6,16 @@ import { store } from '~/store';
 
 import Main from './app/Main';
 import './globals.css';
+import { BrowserRouter } from 'react-router-dom';
 
 const App = () => (
   <React.StrictMode>
     <Provider store={store}>
+    <BrowserRouter>
       <ThemeProvider>
         <Main />
       </ThemeProvider>
+    </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
