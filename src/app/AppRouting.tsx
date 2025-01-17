@@ -39,7 +39,13 @@ const AppRouting: React.FC = () => {
             />
 
             {/* Rutas para los micro frontends */}
-            <Route path="/clientes/*" element={<LoadRemote remoteLoader={() => import('microapp/RemoteRouting')} />} />
+            <Route
+              path="/clientes/*"
+              element={
+                // Leer el archivo LoadRemote
+                <LoadRemote remoteUrl={`${process.env.MF_1_URL}/remoteEntry.js`} scope="microapp" module="./RemoteRouting" />
+              }
+            />
 
             {/* Ruta para cuando no se encuentra la página */}
             <Route path="*" element={<NotFoundScreen />} />

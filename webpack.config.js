@@ -78,10 +78,7 @@ module.exports = (_, argv) => {
       new ModuleFederationPlugin({
         name: "host",
         filename: "remoteEntry.js",
-        remotes: {
-          // Aqui se agregan lo n remotos que se necesiten
-          microapp: `microapp@${process.env.MF_1_URL}/remoteEntry.js`,
-        },
+        remotes: {},
         exposes: {
         },
         shared: {
