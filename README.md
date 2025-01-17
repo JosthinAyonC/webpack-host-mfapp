@@ -115,11 +115,11 @@ export default {NombreMicroFront}Routing;
 ```
 *Nota importante: Debe estar exportado por defecto para que webpack pueda reconocer el functional componet exportado.*
 
-#### 4. Actualizar el `webpack.config.js` para el Routing
-Modifica la sección `exposes` para reflejar el nuevo nombre del Routing:
+#### 4. Actualizar el `webpack.config.js` del remoto para el Routing
+Modifica la sección `exposes` para reflejar el nuevo nombre del Routing micro front-end:
 ```javascript
 exposes: {
-  "./{nombreMicroFront}Routing": "./src/app/{nombreMicroFront}Routing",
+  "./{NombreMicroFront}Routing": "./src/app/{NombreMicroFront}Routing",
 },
 ```
 
