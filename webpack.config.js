@@ -79,8 +79,7 @@ module.exports = (_, argv) => {
         name: "host",
         filename: "remoteEntry.js",
         remotes: {
-          // Aqui se agregan lo n remotos que se necesiten
-          microapp: `microapp@${process.env.MF_1_URL}/remoteEntry.js`,
+          // Aqui nunca se agregan los remotos, esto se debe a que se cargan dinamicamente.
         },
         exposes: {
         },
