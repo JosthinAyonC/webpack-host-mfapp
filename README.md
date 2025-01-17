@@ -6,6 +6,8 @@
 - [Estructura General del Proyecto](#estructura-general-del-proyecto)
 - [Get Started](#get-started)
 - [Leamos sobre el submódulo](#leamos-sobre-el-submódulo)
+- [Compartimiento de estados](#compartimiento-de-estados)
+
 ## Descripción General
 
 Este repositorio entrega dos proyectos principales:
@@ -87,12 +89,18 @@ La estructura básica del proyecto es la siguiente:
 1. Clona el repositorio principal Host:
    ```bash
    git clone --recursive <<url>>
+   cd host
+   npm install
    ```
 
 2. Clona el repositorio Remote Example para personalizarlo como nuevo micro frontend:
    ```bash
    git clone --recursive <<url>>
+   cd remote-example
+   npm install
    ```
+
+*Nota:* Es importante utilizar `npm` para evitar manejar dependencias alteradas.
 
 ### Personalizar el Micro Frontend (En caso de nuevo micro-front)
 
@@ -113,18 +121,54 @@ Cambia `RemoteRouting` por `{NombreMicroFront}Routing.tsx` y asegúrate de expor
 ```javascript
 export default {NombreMicroFront}Routing;
 ```
-*Nota importante: Debe estar exportado por defecto para que webpack pueda reconocer el functional componet exportado.*
+*Nota importante:* Debe estar exportado por defecto para que webpack pueda reconocer el functional componet exportado.
 
 #### 4. Actualizar el `webpack.config.js` del remoto para el Routing
 Modifica la sección `exposes` para reflejar el nuevo nombre del Routing micro front-end:
 ```javascript
 exposes: {
-  "./{NombreMicroFront}Routing": "./src/app/{NombreMicroFront}Routing",
+    "./{NombreMicroFront}Routing": "./src/app/{NombreMicroFront}Routing",
 },
 ```
 
+#### 5. Ejecutar los proyectos
+Sitúate en la raíz de cada proyecto y ejecuta el siguiente comando para correrlos:
+```bash
+npm start
+```
+
+*Nota importante:* Cada micro frontend es independiente y puede levantarse por separado. El Host no genera dependencia para sus hijos, por lo que puedes desarrollar cada proyecto de manera aislada. Sin embargo para corroborar cambios dentro de un micr-front, se recomienda levantar ambos proyectos (El proyecto host y el proyecto remoto donde se realizaron los cambios).
+
 ---
+
+# Compartimiento de estados
+
+El **store** se decidió dejar en el módulo compartido `sasf-commons` y trabajamos con **Redux**. Esto permite compartir el estado global entre los distintos micro frontends.
+
+### Ejemplo de Selector
+Para acceder a un estado global:
+```typescript
+import { useSelector } from 'react-redux';
+import { RootState } from '~/store';
+
+const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+```
+
+### Ejemplo de Dispatch
+Para modificar el estado global:
+```typescript
+import { useDispatch } from 'react-redux';
+import { login } from '~/store/authSlice';
+
+const dispatch = useDispatch();
+dispatch(login({
+  isAuthenticated: true,
+  token: 'token-example',
+  username: 'username-example',
+  roles: ['ADMIN'],
+}));
+```
 
 # Leamos sobre el submódulo
 Para más información, consulta la documentación del submódulo:  
-[Click Aquí!](https://github.com/JosthinAyonC/sasf-commons/blob/main/README.md)
+[https://github.com/JosthinAyonC/sasf-commons/blob/main/README.md](https://github.com/JosthinAyonC/sasf-commons/blob/main/README.md)
