@@ -90,21 +90,21 @@ La estructura básica del proyecto es la siguiente:
 1. Clona el repositorio principal Host:
    ```bash
    git clone --recursive <<url>>
-   cd host
+   cd <<nombre carpeta clonada>>
    npm install
    ```
 
 2. Clona el repositorio Remote Example para personalizarlo como nuevo micro frontend:
    ```bash
    git clone --recursive <<url>>
-   cd remote-example
+   cd <<nombre carpeta clonada>>
    npm install
    ```
 
 *Nota:* Es importante utilizar `npm` para evitar manejar dependencias alteradas.
 
 ### Personalizar el Micro Frontend (En caso de nuevo micro-front)
-
+*En el proyecto remoto:*
 #### 1. Cambiar el `ModuleFederationPlugin` en `webpack.config.js`
 Modifica el nombre `microapp` por el nombre deseado del micro frontend:
 ```javascript
@@ -124,7 +124,7 @@ export default {NombreMicroFront}Routing;
 ```
 *Nota importante:* Debe estar exportado por defecto para que webpack pueda reconocer el functional componet exportado.
 
-#### 4. Actualizar el `webpack.config.js` del remoto para el Routing
+#### 4. Actualizar el `webpack.config.js` para el Routing
 Modifica la sección `exposes` para reflejar el nuevo nombre del Routing micro front-end:
 ```javascript
 exposes: {
