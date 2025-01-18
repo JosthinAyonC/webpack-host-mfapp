@@ -16,12 +16,12 @@ const AppRouting: React.FC = () => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-[var(--bg)]">
       {/* Sidebar */}
       {isAuthenticated && <Sidebar isMobile={isMobile} />}
 
       {/* Contenido principal */}
-      <div className={`flex-1 overflow-y-auto ${isMobile ? 'ml-0' : 'ml-64'}`}>
+      <div className={`flex-1 overflow-y-auto ${isMobile ? 'ml-0' : 'ml-64'} `}>
         <div className="p-4">
           <Routes>
             {/* Rutas de la aplicación */}

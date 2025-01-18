@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from '~/form/Form';
-import { FormState, TextField } from '~/form/fields';
+import { Button, FormState, TextField } from '~/form/fields';
 
 export const FormUse = () => {
   const methods = useForm<FormState>({
@@ -17,7 +17,9 @@ export const FormUse = () => {
     <div className="bg-[var(--bg)]">
       <Form<FormState> onSubmit={onSubmit} methods={methods} className="space-y-4">
         <TextField name="name" label="Name" isRequired placeholder="Enter your name" />
-        <button type="submit">Submit</button>
+        <Button variant="outline" type="submit">
+          Submit
+        </Button>
       </Form>
     </div>
   );
