@@ -7,6 +7,7 @@
 - [Get Started](#get-started)
 - [Compartimiento de estados](#compartimiento-de-estados)
 - [Styling](#styling)
+- [Entornos de trabajao](#entornos-de-trabajo)
 - [Leamos sobre el submódulo](#leamos-sobre-el-submódulo)
 
 ## Descripción General
@@ -105,7 +106,7 @@ La estructura básica del proyecto es la siguiente:
 
 ### Personalizar el Micro Frontend (En caso de nuevo micro-front)
 **Antes de empezar:** en esta sección se refiere a *nombre* pero su término adecuado es scope, hace referencia a un identificador único para cada micro front end que conforma la apliación.
-*En el proyecto remoto:*
+## *En el proyecto remoto:*
 #### 1. Cambiar la variable de entorno `APP_NAME_SCOPE` tanto para `.env` y `.env.local`.
 Modifica el nombre `microapp` por el nombre deseado del micro frontend:
 ```bash
@@ -132,11 +133,35 @@ export default {NombreMicroFront}Routing;
 Modifica la sección `exposes` para reflejar el nuevo nombre del Routing micro front-end:
 ```javascript
 exposes: {
-    "./{NombreMicroFront}Routing": "./src/app/{NombreMicroFront}Routing",
+  "./{NombreMicroFront}Routing": "./src/app/{NombreMicroFront}Routing",
 },
 ```
 
-#### 5. Ejecutar los proyectos
+## *En el proyecto host:*
+
+#### 5. Dentro del archivo `AppRouting.tsx` importar el nuevo componente como una nueva ruta
+
+Usaremos el componente `LoadRemote` para cargar el nuevo micro frontend, asignándole una ruta predeterminada, por ejemplo `/nuevomicro/*`. Cada vez que accedan a esta ruta, redirigirá al routing del nuevo micro frontend remoto.
+
+- En el prop `scope`, debemos asignar exactamente el mismo identificador que configuramos en la variable de entorno `APP_NAME_SCOPE` del micro frontend remoto.
+- En el prop `remoteUrl`, debemos especificar la URL donde se encuentra activo el nuevo micro frontend, seguido del path de `remoteEntry.js`.
+- Finalmente, en el prop `module`, debemos referenciar el archivo expuesto en el archivo `webpack.config.js` del remoto.
+
+Ejemplo de implementación:
+
+```tsx
+<Route
+  path="/nuevomicro/*"
+  element={
+    <LoadRemote
+      scope="microapp"
+      remoteUrl={`${process.env.MF_NUEVAAPP_URL}/remoteEntry.js`}
+      module="./RemoteRouting"
+    />
+  }
+/>
+```
+#### 6. Ejecutar los proyectos
 Sitúate en la raíz de cada proyecto y ejecuta el siguiente comando para correrlos:
 ```bash
 npm start
@@ -232,6 +257,13 @@ Otros ejemplos comunes:
 
 <input class="border-[var(--border)] placeholder:text-[var(--placeholder)] focus:border-[var(--focus)]" />
 ```
+
+---
+
+# Entornos de trabajo
+Tanto como para el proyecto host como para el proyecto remoto, se usan dos entornos, desarrollo y producción.
+* **Desarrollo:** Debemos asegurarnos de guardar las variables en el archivo `.env.local`.
+* **Producción:** Debemos asegurarnos de guardar las variables en el archivo `.env`.
 
 ---
 

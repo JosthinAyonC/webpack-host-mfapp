@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dialog } from '~/components/ui/Dialog';
-import { useDialog } from '~/provider/DialogContext';
+import { useDialog } from '~/hooks';
 
 /**
  * Cada componente de diálogo debe manejar las siguientes props:

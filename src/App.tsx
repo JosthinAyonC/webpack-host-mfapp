@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { DialogProvider } from '~/provider/DialogContext';
 import { ThemeProvider } from '~/provider/ThemeProvider';
+import { ToastProvider } from '~/provider/ToastContext';
 import { store } from '~/store';
 
 import AppRouting from './app/AppRouting';
@@ -12,13 +13,15 @@ import './globals.css';
 const App = () => (
   <React.StrictMode>
     <BrowserRouter>
-      <DialogProvider>
-        <Provider store={store}>
-          <ThemeProvider>
-            <AppRouting />
-          </ThemeProvider>
-        </Provider>
-      </DialogProvider>
+      <ToastProvider>
+        <DialogProvider>
+          <Provider store={store}>
+            <ThemeProvider>
+              <AppRouting />
+            </ThemeProvider>
+          </Provider>
+        </DialogProvider>
+      </ToastProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

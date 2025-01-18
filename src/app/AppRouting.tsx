@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import LoadRemote from '~/components/micro/LoadRemote';
 import PrivateRoute from '~/guard/PrivateRouting';
-import { useMediaQuery } from '~/hooks/useMediQuery';
+import { useMediaQuery } from '~/hooks/useMediaQuery';
 import { RootState } from '~/store';
 import NotFoundScreen from '~/utils/NotFoundScreen';
 import UnauthorizedScreen from '~/utils/UnauthorizedScreen';
