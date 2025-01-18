@@ -25,6 +25,7 @@ export const Sidebar: React.FC<{ className?: string; isMobile?: boolean }> = ({ 
   };
 
   const toggleRouteExpansion = (path: string) => {
+    setIsOpen(true);
     setExpandedRoutes((prev) => (prev.includes(path) ? prev.filter((p) => p !== path) : [...prev, path]));
   };
 

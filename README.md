@@ -104,12 +104,16 @@ La estructura básica del proyecto es la siguiente:
 *Nota:* Es importante utilizar `npm` para evitar manejar dependencias alteradas.
 
 ### Personalizar el Micro Frontend (En caso de nuevo micro-front)
+**Antes de empezar:** en esta sección se refiere a *nombre* pero su término adecuado es scope, hace referencia a un identificador único para cada micro front end que conforma la apliación.
 *En el proyecto remoto:*
-#### 1. Cambiar el `ModuleFederationPlugin` en `webpack.config.js`
+#### 1. Cambiar la variable de entorno `APP_NAME_SCOPE` tanto para `.env` y `.env.local`.
 Modifica el nombre `microapp` por el nombre deseado del micro frontend:
-```javascript
-name: "nuevoMicroapp",
+```bash
+APP_NAME_SCOPE=nuevomicroapp
+# Adicional modificar el puerto de tu aplicación (Asegúrate de que sea un puerto no ocupado antes por otro micro front end)
+APP_PORT=<<tu-puerto>>
 ```
+*Nota:* Es importante que esté en minusculas, este es el scope que se le agregara en el micro front, podríamos definirlo como identificador único.
 
 #### 2. Actualizar el `package.json`
 Cambia el nombre del paquete:
