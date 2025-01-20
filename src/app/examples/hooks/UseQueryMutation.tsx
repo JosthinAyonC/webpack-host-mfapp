@@ -1,4 +1,6 @@
 import React from 'react';
+import { Form } from '~/form/Form';
+import { DatePickerField, FormState } from '~/form/fields';
 import useMutation from '~/hooks/useMutation';
 import useQuery from '~/hooks/useQuery';
 
@@ -34,6 +36,9 @@ function UseQueryMutation() {
 
   return (
     <div>
+      <Form<FormState> onSubmit={handleSubmit}>
+        <DatePickerField name="date" label="Date" />
+      </Form>
       <h1>Data:</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <button onClick={refetch}>Refetch Data</button>
