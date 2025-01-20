@@ -36,8 +36,8 @@ export const Sidebar: React.FC<{ className?: string; isMobile?: boolean }> = ({ 
       icon: <FontAwesomeIcon icon={faUsers} />,
       children: [
         {
-          path: '/clientes/activos',
-          label: 'Clientes Activos',
+          path: '/clientes/home',
+          label: 'Clientes Home',
           icon: <FontAwesomeIcon icon={faUserCheck} />,
         },
         {
@@ -68,23 +68,30 @@ export const Sidebar: React.FC<{ className?: string; isMobile?: boolean }> = ({ 
 
       return (
         <li key={route.label} className="mb-2 relative group overflow-visible">
-          <div
-            className={`flex items-center justify-between p-2 cursor-pointer rounded hover:bg-[var(--hover)] ${isActive ? 'bg-[var(--highlight)]' : ''}`}
-            onClick={() => (hasChildren ? toggleRouteExpansion(route.label) : handleRouteClick(route.path))}
-          >
-            {route.path ? (
-              <Link to={route.path} className="flex items-center gap-2 text-[var(--font)]">
-                {route.icon}
-                {isOpen && <span>{route.label}</span>}
-              </Link>
-            ) : (
+          {route.path ? (
+            <Link
+              to={route.path}
+              className={`flex items-center justify-between p-2 cursor-pointer rounded hover:bg-[var(--hover)] ${isActive ? 'bg-[var(--hover)]' : ''}`}
+              onClick={() => handleRouteClick(route.path)}
+            >
               <div className="flex items-center gap-2 text-[var(--font)]">
                 {route.icon}
                 {isOpen && <span>{route.label}</span>}
               </div>
-            )}
-            {hasChildren && isOpen && <FontAwesomeIcon icon={isExpanded ? faChevronDown : faChevronRight} />}
-          </div>
+              {hasChildren && isOpen && <FontAwesomeIcon icon={isExpanded ? faChevronDown : faChevronRight} />}
+            </Link>
+          ) : (
+            <div
+              className={`flex items-center justify-between p-2 cursor-pointer rounded hover:bg-[var(--hover)] ${isActive ? 'bg-[var(--hover)]' : ''}`}
+              onClick={() => toggleRouteExpansion(route.label)}
+            >
+              <div className="flex items-center gap-2 text-[var(--font)]">
+                {route.icon}
+                {isOpen && <span>{route.label}</span>}
+              </div>
+              {hasChildren && isOpen && <FontAwesomeIcon icon={isExpanded ? faChevronDown : faChevronRight} />}
+            </div>
+          )}
           {hasChildren && (
             <AnimatePresence>
               {isExpanded && isOpen && (
