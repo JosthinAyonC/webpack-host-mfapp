@@ -9,19 +9,24 @@ interface Route {
   label: string;
   icon: React.ReactNode;
   children?: Route[];
+  onToggle?: (_isOpen: boolean) => void;
 }
 
-export const Sidebar: React.FC<{ className?: string; isMobile?: boolean }> = ({ className, isMobile }) => {
+export const Sidebar: React.FC<{ className?: string; isMobile?: boolean; onToggle: (isOpen: boolean) => void }> = ({ className, isMobile, onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedRoutes, setExpandedRoutes] = useState<string[]>([]);
   const location = useLocation();
 
   const toggleSidebar = () => {
     setIsOpen((prev) => !prev);
+    onToggle(!isOpen); // Actualizar estado del padre
   };
 
   const handleRouteClick = (path?: string) => {
-    if (isMobile && path) setIsOpen(false); // Cierra el sidebar en móvil solo si tiene una ruta
+    if (isMobile && path) {
+      setIsOpen(false);
+      onToggle(false); // Actualizar estado del padre
+    }
   };
 
   const toggleRouteExpansion = (path: string) => {

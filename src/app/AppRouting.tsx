@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import LoadRemote from '~/components/micro/LoadRemote';
@@ -14,14 +14,21 @@ import { Sidebar } from './layout/Sidebar';
 const AppRouting: React.FC = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <div className="flex h-screen bg-[var(--bg)]">
       {/* Sidebar */}
-      {isAuthenticated && <Sidebar isMobile={isMobile} />}
+      {isAuthenticated && (
+        <Sidebar
+          isMobile={isMobile}
+          className=""
+          onToggle={(isOpen) => setIsSidebarOpen(isOpen)} // Callback para actualizar el estado
+        />
+      )}
 
       {/* Contenido principal */}
-      <div className={`flex-1 overflow-y-auto ${isMobile ? 'ml-0' : 'ml-64'} `}>
+      <div className={`flex-1 overflow-y-auto transition-all duration-200 ${isMobile ? 'ml-0' : isSidebarOpen ? 'ml-64' : 'ml-16'}`}>
         <div className="p-4">
           <Routes>
             {/* Rutas de la aplicación */}
@@ -38,7 +45,6 @@ const AppRouting: React.FC = () => {
             />
 
             {/* Rutas para microapps */}
-            {/* Leer Load Remote */}
             <Route path="/clientes/*" element={<LoadRemote scope="microapp" remoteUrl={`${process.env.MF_1_URL}/remoteEntry.js`} module="./RemoteRouting" />} />
 
             {/* Ruta para not found page */}
