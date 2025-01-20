@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form } from '~/form/Form';
-import { DatePickerField, FormState } from '~/form/fields';
+import { DatePickerField, DropdownField, FormState } from '~/form/fields';
 import useMutation from '~/hooks/useMutation';
 import useQuery from '~/hooks/useQuery';
 
@@ -38,6 +38,14 @@ function UseQueryMutation() {
     <div>
       <Form<FormState> onSubmit={handleSubmit}>
         <DatePickerField name="date" label="Date" />
+        <DropdownField
+          name="status"
+          label="Status"
+          options={[
+            { label: 'Active', value: 'active' },
+            { label: 'Inactive', value: 'inactive' },
+          ]}
+        />
       </Form>
       <h1>Data:</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
