@@ -9,6 +9,7 @@
 - [Styling](#styling)
 - [Entornos de trabajao](#entornos-de-trabajo)
 - [Leamos sobre el submódulo](#leamos-sobre-el-submódulo)
+- [Estado de la aplicación](#estado-de-la-aplicación)
 
 ## Descripción General
 
@@ -270,3 +271,35 @@ Tanto como para el proyecto host como para el proyecto remoto, se usan dos entor
 # Leamos sobre el submódulo
 Para más información, consulta la documentación del submódulo:  
 [https://github.com/JosthinAyonC/sasf-commons/blob/main/README.md](https://github.com/JosthinAyonC/sasf-commons/blob/main/README.md)
+
+
+---
+# Estado de la aplicación
+Para el estado de la aplicación nos manejamos con slices personalizados.
+
+Los slices personalizados deben ser gestionados exclusivamente dentro de los micro frontends que los requieran. Esto se debe a que los estados pueden variar entre diferentes aplicaciones, y cada micro frontend tiene necesidades específicas en cuanto a la estructura y manejo de su estado global.
+
+## **¿Por qué no en `sasf-commons`?**
+
+El submódulo sasf-commons es una librería compartida entre múltiples proyectos, y su propósito principal es proporcionar componentes, hooks y utilidades comunes. Personalizar esta librería con estados específicos de una aplicación podría causar conflictos y falta de modularidad, ya que:
+1. Independencia de micro frontends: Cada micro frontend puede tener estados únicos que no se aplican a otros.
+2. Evolución del estado: Los requisitos de estado pueden cambiar entre aplicaciones, y centralizarlos en sasf-commons limitaría la capacidad de escalabilidad.
+3. Separación de responsabilidades: sasf-commons no debe ser responsable de la lógica específica de los micro frontends.
+
+## Implementación
+
+Los slices personalizados deben ser creados en el directorio `src/state/slices/` dentro de cada micro frontend correspondiente a la aplicación o en cada micro front end que sea necesario. Por ejemplo, si necesitas manejar información específica del usuario en una aplicación, el slice debe estar definido como:
+```javascript
+import userSlice from './slices/userDataSlice';
+
+const microappslices = {
+    // Aquí se van a ir agregando los slices personalizados de la aplicación.
+    user: userSlice,
+};
+
+export default microappslices;
+```
+A medida que más slices sean necesarios, estos se agregarán en este archivo para mantener un manejo claro y modular del estado.
+
+## Ejemplo práctico:
+Se implementa un estado de aplicación que nos ayude con la información de licenciatario dentro de la aplicación **CGLASS.** Se procede a implementar un slice que se llame `licenciatarioSlice` y servirá solamente para la aplicación CGLASS, esto no afectará el comportamiendo de la libreria que se encontrará implementada en otros proyectos, por ejemplo **SASF TARIFARIO** porque ahi no es necesario hacerlo.

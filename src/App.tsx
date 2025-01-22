@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { ModalProvider } from '~/provider';
 import { DialogProvider } from '~/provider/DialogContext';
 import { ThemeProvider } from '~/provider/ThemeProvider';
 import { ToastProvider } from '~/provider/ToastContext';
 import { store } from '~/store';
 
 import AppRouting from './app/AppRouting';
+import { LogoutDialog } from './app/dialogs/LogoutDialog';
 import './globals.css';
 
 const App = () => (
@@ -17,7 +19,9 @@ const App = () => (
         <DialogProvider>
           <Provider store={store}>
             <ThemeProvider>
-              <AppRouting />
+              <ModalProvider keyId="logout" content={LogoutDialog}>
+                <AppRouting />
+              </ModalProvider>
             </ThemeProvider>
           </Provider>
         </DialogProvider>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Screen from '~/components/ui/Screen';
 import ThemeToggle from '~/components/ui/ThemeTogle';
 import { useToast } from '~/hooks/useToast';
 
@@ -10,7 +11,7 @@ import UseQueryMutation from '../examples/hooks/UseQueryMutation';
 export const Main = () => {
   const { addToast } = useToast();
   return (
-    <>
+    <Screen title="Dashboard">
       <button className="btn" onClick={() => addToast('Operation completed successfully!', 'success')}>
         Click me
       </button>
@@ -19,6 +20,6 @@ export const Main = () => {
       <DialogUse />
       <UseDebounceExample />
       <UseQueryMutation />
-    </>
+    </Screen>
   );
 };
