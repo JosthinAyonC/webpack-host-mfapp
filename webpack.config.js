@@ -33,6 +33,9 @@ module.exports = (_, argv) => {
     devServer: {
       port: process.env.APP_PORT,
       historyApiFallback: true,
+      static: {
+        directory: path.join(__dirname, 'public'),
+      },
       watchFiles: [path.resolve(__dirname, "src")],
       onListening: function (devServer) {
         const port = devServer.server.address().port;
