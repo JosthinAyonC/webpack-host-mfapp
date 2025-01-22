@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Dialog } from '~/components/ui/Dialog';
 import { Button } from '~/form/fields';
+import { useDialog } from '~/hooks';
 
 import { logout } from '../../state/slices/authSlice';
 
 export const LogoutDialog: React.FC<{ keyId: string; value: string | null }> = ({ keyId }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { closeDialog } = useDialog();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -21,7 +23,7 @@ export const LogoutDialog: React.FC<{ keyId: string; value: string | null }> = (
       <p className="text-[var(--font)] mb-6">Estás a punto de cerrar sesión. ¿Estás seguro?</p>
       <div className="flex justify-center gap-4">
         <Button onClick={handleLogout}>Cerrar sesión</Button>
-        <Button variant="outline" onClick={() => console.log('Cerrar diálogo')}>
+        <Button variant="outline" onClick={() => closeDialog(keyId)}>
           Cancelar
         </Button>
       </div>
