@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router';
 import { Dialog } from '~/components/ui/Dialog';
 import { Button } from '~/form/fields';
 import { useDialog } from '~/hooks';
-
-import { logout } from '../../state/slices/authSlice';
+import { logout } from '~/store';
 
 export const LogoutDialog: React.FC<{ keyId: string; value: string | null }> = ({ keyId }) => {
   const dispatch = useDispatch();
