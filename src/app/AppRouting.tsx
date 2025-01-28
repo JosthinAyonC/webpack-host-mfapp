@@ -10,6 +10,8 @@ import UnauthorizedScreen from '~/utils/UnauthorizedScreen';
 
 import LoginPage from './auth/LoginPage';
 import { Main } from './dashboard/Main';
+import { BasicTable } from './examples/table/DefaultTable';
+import { QuerysTable } from './examples/table/QuerysTable';
 import { Sidebar } from './layout/Sidebar';
 
 const AppRouting: React.FC = () => {
@@ -28,6 +30,8 @@ const AppRouting: React.FC = () => {
           <Routes>
             {/* Rutas de la aplicación */}
             <Route path="/home" element={<Main />} />
+            <Route path="/query" element={<QuerysTable />} />
+            <Route path="/table" element={<BasicTable />} />
 
             {/* Ejemplo de private routing */}
             <Route
