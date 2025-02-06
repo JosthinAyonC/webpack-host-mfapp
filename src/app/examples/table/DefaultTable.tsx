@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
+import { Table, ThemeToggle } from '~/components/ui';
 import Screen from '~/components/ui/Screen';
-import Table from '~/components/ui/Table';
-import ThemeToggle from '~/components/ui/ThemeTogle';
 
 type Item = {
   name: string;

@@ -1,6 +1,6 @@
 import React from 'react';
+import { ThemeToggle } from '~/components/ui';
 import Screen from '~/components/ui/Screen';
-import ThemeToggle from '~/components/ui/ThemeTogle';
 import { useToast } from '~/hooks/useToast';
 
 import { DialogUse } from '../examples/dialog/DialogUse';

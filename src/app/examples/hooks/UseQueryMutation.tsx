@@ -1,20 +1,14 @@
 import React from 'react';
 import { Form } from '~/form/Form';
 import { DatePickerField, DropdownField, FormState } from '~/form/fields';
-import useMutation from '~/hooks/useMutation';
-import useQuery from '~/hooks/useQuery';
+import { useMutation, useQuery } from '~/hooks';
 
 function UseQueryMutation() {
   // Fetching data from PokeAPI
   const { data, loading, error, refetch } = useQuery('https://pokeapi.co/api/v2/ability/', { method: 'GET' }, { page: 1, limit: 10, sort: 'asc' });
 
   // Posting data to a mock API
-  const {
-    mutate,
-    data: responseData,
-    loading: loadingMutation,
-    error: errorMutation,
-  } = useMutation(
+  const { mutate, loading: loadingMutation } = useMutation(
     'https://jsonplaceholder.typicode.com/posts', // Mock API endpoint
     'POST'
   );
@@ -54,8 +48,6 @@ function UseQueryMutation() {
         <button onClick={handleSubmit} disabled={loadingMutation}>
           {loadingMutation ? 'Creating...' : 'Create Resource'}
         </button>
-        {errorMutation && <p>Error: {errorMutation}</p>}
-        {responseData && <pre>{JSON.stringify(responseData, null, 2)}</pre>}
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
-import QueryTable from '~/components/ui/QueryTable';
-import Screen from '~/components/ui/Screen';
-import ThemeToggle from '~/components/ui/ThemeTogle';
-import useMutation from '~/hooks/useMutation';
+import { QueryTable, Screen, ThemeToggle } from '~/components/ui';
+import { useMutation } from '~/hooks';
 
 interface Usuario {
   id: number;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useDebounce from '~/hooks/useDebounce';
+import { useDebounce } from '~/hooks';
 
 export function UseDebounceExample() {
   const [query, setQuery] = useState('');
