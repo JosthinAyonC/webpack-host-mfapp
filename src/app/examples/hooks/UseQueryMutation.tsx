@@ -43,7 +43,7 @@ function UseQueryMutation() {
       </Form>
       <h1>Data:</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
-      <button onClick={refetch}>Refetch Data</button>
+      <button onClick={() => refetch}>Refetch Data</button>
       <div>
         <button onClick={handleSubmit} disabled={loadingMutation}>
           {loadingMutation ? 'Creating...' : 'Create Resource'}
