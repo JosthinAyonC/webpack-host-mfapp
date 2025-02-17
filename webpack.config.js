@@ -2,25 +2,21 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
-
-// Carga manual de variables de entorno
 const dotenv = require("dotenv");
-
-// Detecta el entorno y carga el archivo adecuado
-const isProduction = process.env.NODE_ENV === "production";
-dotenv.config({
-  path: isProduction ? "./.env" : "./.env.local",
-});
 
 const deps = require("./package.json").dependencies;
 const printCompilationMessage = require("./compilation.config.js");
 
 module.exports = (_, argv) => {
+  const isProduction = argv.mode === "production";
   console.log(`Ejecutando proyecto en modo ${isProduction ? "producción" : "desarrollo"}`);
+  dotenv.config({ path: isProduction ? "./.env.prod" : "./.env.local" });
+
 
   return {
+    mode: argv.mode || 'development',
     output: {
-      publicPath: `http://localhost:${process.env.APP_PORT}/`,
+      publicPath: `/`,
     },
 
     resolve: {
@@ -103,7 +99,7 @@ module.exports = (_, argv) => {
         template: "./src/index.html",
       }),
       new Dotenv({
-        path: isProduction ? "./.env" : "./.env.local",
+        path: isProduction ? "./.env.prod" : "./.env.local",
       }),
     ],
   };
