@@ -16,7 +16,8 @@ module.exports = (_, argv) => {
   return {
     mode: argv.mode || 'development',
     output: {
-      publicPath: `/`,
+      // TODO: IMPROVE THIS, WE NEED CALCULATE THE PUBLIC PATH BASED ON THE CURRENT DOMAIN
+      publicPath: isProduction ? `${process.env.CURRENT_DOMAIN}/` : `http://localhost:${process.env.APP_PORT}/`,
     },
 
     resolve: {
