@@ -1,4 +1,4 @@
-import { faBars, faChevronDown, faChevronRight, faHome, faMapMarkerAlt, faUserCheck, faUserTimes, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faBoxOpen, faChevronDown, faChevronRight, faHome, faMapMarkerAlt, faUserTimes, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
@@ -41,9 +41,9 @@ export const Sidebar: React.FC<{ className?: string; isMobile?: boolean; onToggl
       icon: <FontAwesomeIcon icon={faUsers} />,
       children: [
         {
-          path: '/clientes/home',
-          label: 'Clientes Home',
-          icon: <FontAwesomeIcon icon={faUserCheck} />,
+          path: '/inventario/home',
+          label: 'Inventario Home',
+          icon: <FontAwesomeIcon icon={faBoxOpen} />,
         },
         {
           label: 'Clientes Inactivos',
@@ -131,11 +131,11 @@ export const Sidebar: React.FC<{ className?: string; isMobile?: boolean; onToggl
       <motion.aside
         initial={{
           x: isMobile ? '-100%' : 0,
-          width: isMobile ? '80%' : isOpen ? 250 : 64,
+          width: isMobile ? '80%' : isOpen ? 325 : 80,
         }}
         animate={{
           x: isMobile && isOpen ? 0 : isMobile ? '-100%' : 0,
-          width: isMobile ? '80%' : isOpen ? 250 : 64,
+          width: isMobile ? '80%' : isOpen ? 325 : 80,
         }}
         transition={{ duration: 0.2 }}
         className={`fixed top-0 ${isMobile ? 'h-screen' : 'h-full'} bg-[var(--primary)] text-[var(--font)] z-50 flex flex-col p-4 overflow-hidden ${className}`}

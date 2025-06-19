@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoadRemote from '~/components/micro/LoadRemote';
@@ -9,42 +9,51 @@ import NotFoundScreen from '~/utils/NotFoundScreen';
 import UnauthorizedScreen from '~/utils/UnauthorizedScreen';
 
 import LoginPage from './auth/LoginPage';
-import { Main } from './dashboard/Main';
-import { BasicTable } from './examples/table/DefaultTable';
-import { QuerysTable } from './examples/table/QuerysTable';
 import { Sidebar } from './layout/Sidebar';
+
+// Rutas de microfrontend
+const microfrontends = [{ path: 'inventario/*', scope: 'microapp', url: process.env.MF_1_URL, module: './RemoteRouting' }];
 
 const AppRouting: React.FC = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const { isAuthenticated: showSidebar } = useSelector((state: RootState) => state.auth);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  useEffect(() => {
+    setIsSidebarOpen(false);
+  }, [showSidebar, isMobile]);
+
   return (
     <div className="flex h-screen bg-[var(--bg)]">
       {/* Sidebar */}
-      {showSidebar && <Sidebar isMobile={isMobile} className="" onToggle={(isOpen) => setIsSidebarOpen(isOpen)} />}
+      {showSidebar && <Sidebar isMobile={isMobile} onToggle={(isOpen) => setIsSidebarOpen(isOpen)} />}
 
       {/* Contenido principal */}
-      <div className={`flex-1 overflow-y-auto transition-all duration-200 ${!showSidebar || isMobile ? 'ml-0' : isSidebarOpen ? 'ml-64' : 'ml-16'}`}>
+      <div className={`flex-1 space-x-2 overflow-y-auto transition-all duration-200 ${!showSidebar || isMobile ? 'ml-0' : isSidebarOpen ? 'ml-80' : 'ml-16'}`}>
         <div>
           <Routes>
             {/* Rutas de la aplicación */}
-            <Route path="/home" element={<Main />} />
-            <Route path="/query" element={<QuerysTable />} />
-            <Route path="/table" element={<BasicTable />} />
-
-            {/* Ejemplo de private routing */}
             <Route
-              path="/"
+              path="principal"
               element={
                 <PrivateRoute>
-                  <Main />
+                  <>Hello Micro - Front ENDs</>
                 </PrivateRoute>
               }
             />
 
-            {/* Rutas para microapps */}
-            <Route path="/clientes/*" element={<LoadRemote scope="microapp" remoteUrl={`${process.env.MF_1_URL}/remoteEntry.js`} module="./RemoteRouting" />} />
+            {/* Microfrontends */}
+            {microfrontends.map(({ path, scope, url, module }) => (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  <PrivateRoute>
+                    <LoadRemote scope={scope} remoteUrl={`${url}/remoteEntry.js`} module={module} />
+                  </PrivateRoute>
+                }
+              />
+            ))}
 
             {/* Ruta para not found page */}
             <Route path="*" element={<NotFoundScreen />} />
@@ -53,7 +62,7 @@ const AppRouting: React.FC = () => {
             <Route path="auth/login" element={showSidebar ? <Navigate to={'/'} /> : <LoginPage />} />
 
             {/* Ruta de unauthorized */}
-            <Route path="/unauthorized" element={<UnauthorizedScreen />} />
+            <Route path="unauthorized" element={<UnauthorizedScreen />} />
           </Routes>
         </div>
       </div>
